@@ -11,7 +11,7 @@ public class UserJDBCDao implements UserDAO {
     private Connection connection;
 
     public UserJDBCDao(Connection connection) {
-        this.connection = DBHelper.getSessionFactory();
+        this.connection = connection;
     }
 
     //проверить наличие имени и пароля
@@ -153,7 +153,7 @@ public class UserJDBCDao implements UserDAO {
         }
     }
 
-    @Override
+
     public void createTable()  {
         Statement stmt = null;
         try {
@@ -167,7 +167,7 @@ public class UserJDBCDao implements UserDAO {
         }
     }
 
-    @Override
+
     public void dropTable() {
         Statement stmt = null;
         try {

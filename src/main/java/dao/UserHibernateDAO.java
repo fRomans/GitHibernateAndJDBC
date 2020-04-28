@@ -8,7 +8,7 @@ import util.DBHelper;
 
 import java.util.List;
 
-public class UserHibernateDAO  {
+public class UserHibernateDAO implements UserDAO {
 
     private final SessionFactory sessionFactory;
 

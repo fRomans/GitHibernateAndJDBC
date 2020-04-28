@@ -25,8 +25,6 @@ public interface UserDAO {
 
     public void addUser(User user) ;
 
-    public void createTable();
 
-    public void dropTable();
 
 }

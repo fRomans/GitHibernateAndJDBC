@@ -13,10 +13,10 @@ public class UserService {
     private static UserService userService;
 
     private SessionFactory sessionFactory;
-    private final UserDAO userDAO;
+   // private final UserDAO userDAO;
 
     private UserService() {
-        this.userDAO = ;//todo получать dao из фабрики
+      //  this.userDAO = ;//todo получать dao из фабрики
     }
 
     public static UserService getInstance() {

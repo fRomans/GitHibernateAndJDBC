@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertyReader {
+
     public static Properties getPropertyValue(String fileName) {
         Properties properties = new Properties();
         try (InputStream is = PropertyReader.class.getClassLoader().getResourceAsStream(fileName)) {
