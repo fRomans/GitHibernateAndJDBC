@@ -15,21 +15,21 @@ public class DBHelper {
 
     private static SessionFactory sessionFactory;
 
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            sessionFactory = createSessionFactory();
-        }
-        return sessionFactory;
-    }
+//    public static SessionFactory getSessionFactory() {
+//        if (sessionFactory == null) {
+//            sessionFactory = createSessionFactory();
+//        }
+//        return sessionFactory;
+//    }
 
 
     @SuppressWarnings("UnusedDeclaration")
-    private static Configuration getConfiguration() {
+    public static Configuration getConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);//Read metadata from the annotations associated with this class.
 
-    Properties properties = PropertyReader.getPropertyValue("hibernateConn.properties");
-        configuration.setProperty("hibernate.dialect",properties.getProperty("daotype.hibernate.dialect") );
+        Properties properties = PropertyReader.getPropertyValue("hibernateConn.properties");
+        configuration.setProperty("hibernate.dialect", properties.getProperty("daotype.hibernate.dialect"));
         configuration.setProperty("hibernate.connection.driver_class", properties.getProperty("daotype.hibernate.connection.driver_class"));
         configuration.setProperty("hibernate.connection.url", properties.getProperty("daotype.hibernate.connection.url"));
         configuration.setProperty("hibernate.connection.username", properties.getProperty("daotype.hibernate.connection.username"));
@@ -39,19 +39,18 @@ public class DBHelper {
         return configuration;
 
 
-
     }
 
 
-    private static SessionFactory createSessionFactory() {
-        Configuration configuration = getConfiguration();
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
-    }
+//    public static SessionFactory createSessionFactory() {
+//        Configuration configuration = getConfiguration();
+//        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+//        builder.applySettings(configuration.getProperties());
+//        ServiceRegistry serviceRegistry = builder.build();
+//        return configuration.buildSessionFactory(serviceRegistry);
+//    }
 
-    private static Connection getConnection() {
+    public static Connection getConnection() {
         Properties properties = PropertyReader.getPropertyValue("jdbcConn.properties");
         try {
             DriverManager.registerDriver((Driver) Class.forName(properties.getProperty("daotype.drivermanager")).newInstance());
@@ -75,6 +74,6 @@ public class DBHelper {
             throw new IllegalStateException();
         }
     }
-
 }
+
 

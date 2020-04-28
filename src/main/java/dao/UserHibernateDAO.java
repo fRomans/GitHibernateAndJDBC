@@ -4,19 +4,28 @@ import model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.service.ServiceRegistry;
 import util.DBHelper;
+
+import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
 public class UserHibernateDAO implements UserDAO {
 
-    private final SessionFactory sessionFactory;
+    private static  SessionFactory sessionFactory;
 
-    public UserHibernateDAO() {
-        this.sessionFactory = DBHelper.getSessionFactory();
+    public  UserHibernateDAO(Configuration configuration) {
+        if (sessionFactory == null) {
+            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+            builder.applySettings(configuration.getProperties());
+            ServiceRegistry serviceRegistry = builder.build();
+            configuration.buildSessionFactory(serviceRegistry);
+            this.sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+        }
+
     }
-
-
 
 
     //проверить наличие имени и пароля
@@ -56,7 +65,7 @@ public class UserHibernateDAO implements UserDAO {
     }
 
 
-    public void deleteUser(Long id)  {
+    public void deleteUser(Long id) {
 
         Session session = sessionFactory.openSession();
         Transaction tx1 = session.beginTransaction();
@@ -89,7 +98,7 @@ public class UserHibernateDAO implements UserDAO {
     }
 
 
-    public void addUser(User user)  {
+    public void addUser(User user) {
 //проверить наличие имени и пароля
         if (!validateClient(user.getName(), user.getPassword())) {
             System.out.println("!!! Не прошло валидацию!!!");

@@ -1,6 +1,7 @@
 package service;
 
 import dao.UserDAO;
+import dao.UserDaoFactory;
 import dao.UserHibernateDAO;
 import model.User;
 import org.hibernate.SessionFactory;
@@ -11,12 +12,12 @@ import java.util.List;
 
 public class UserService {
     private static UserService userService;
-
-    private SessionFactory sessionFactory;
-   // private final UserDAO userDAO;
+    UserDaoFactory userDaoFactory = new UserDaoFactory();
+    //private SessionFactory sessionFactory;
+    private final UserDAO userDAO = null;
 
     private UserService() {
-      //  this.userDAO = ;//todo получать dao из фабрики
+        this.userDAO = UserDaoFactory.getRealization();//todo получать dao из фабрики
     }
 
     public static UserService getInstance() {
@@ -25,8 +26,10 @@ public class UserService {
         }
         return userService;
     }
+
     UserHibernateDAO dao = new UserHibernateDAO(sessionFactory);
-        public List<User> getAllUsers() throws SQLException {
+
+    public List<User> getAllUsers() throws SQLException {
         return dao.getAllUsers();
     }
 
@@ -39,16 +42,16 @@ public class UserService {
         dao.updateUser(user);
     }
 
-    public User getUserById(long id)  {
-        User  user =  dao.getClientById(id);
+    public User getUserById(long id) {
+        User user = dao.getClientById(id);
         return user;
     }
 
     public boolean addUser(User user) throws SQLException {
 
-            dao.addUser(user);
+        dao.addUser(user);
 
         return false;
     }
 
-    }
+}
