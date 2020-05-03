@@ -6,10 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
-import util.DBHelper;
-
 import org.hibernate.cfg.Configuration;
-
 import java.util.List;
 
 public class UserHibernateDAO implements UserDAO {

@@ -39,7 +39,13 @@ public class MyServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        Long money = new Long(req.getParameter("money"));
+        Long money = 0L;
+        try {
+             money = new Long(req.getParameter("money"));
+
+        }catch (NumberFormatException e){
+            System.out.println("Ошибка формата числа -" + e);
+        }
         User user = new User(name, password, money);
 
         try {

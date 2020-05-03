@@ -3,6 +3,7 @@ package servlets;
 import model.User;
 import service.UserService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,26 +20,29 @@ public class DeleteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteUser.jsp");
+        dispatcher.forward(req, resp);
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+       // RequestDispatcher dispatcher;
         try {
-            int id = Integer.parseInt(req.getParameter("id"));
-
-            try {
-                service.deleteUser(service.getUserById(id));
-                resp.sendRedirect("/users");
-            } catch (SQLException e) {
-                resp.setStatus(400);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            Integer id = Integer.parseInt(req.getParameter("id"));
+//            dispatcher = req.getRequestDispatcher("/deleteUser.jsp");
+//            dispatcher.forward(req, resp);
+            service.deleteUser(service.getUserById(id));
+            resp.sendRedirect("/users");
+        } catch (SQLException | NullPointerException e) {
+            System.out.println("DeleteServlet исключение " + e);
+            resp.setStatus(400);
         }
+
+
     }
 
 }

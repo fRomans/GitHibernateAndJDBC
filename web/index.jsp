@@ -7,7 +7,7 @@
 Если вы хотите начать работу с базой данных пользователей - <br>
 нажмите кнопку ниже:
 
-<form action = "/users" method="get">
+<form action = "/users" method="post">
   <input type="submit" value="Начать работу с базой данных">
 </form>
 </body>

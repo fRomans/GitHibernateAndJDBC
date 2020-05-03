@@ -7,27 +7,32 @@ import model.User;
 import org.hibernate.SessionFactory;
 import util.DBHelper;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
     private static UserService userService;
-    UserDaoFactory userDaoFactory = new UserDaoFactory();
-    //private SessionFactory sessionFactory;
-    private final UserDAO userDAO = null;
+
+    private UserDAO dao ;
 
     private UserService() {
-        this.userDAO = UserDaoFactory.getRealization();//todo получать dao из фабрики
+
+        this.dao = UserDaoFactory.getRealization("hibernateConn.properties");//todo получать dao из фабрики
+    }
+
+    private UserService(UserDAO dao) {
+
+        this.dao = dao;//todo получать dao из фабрики
     }
 
     public static UserService getInstance() {
         if (userService == null) {
-            userService = new UserService(DBHelper.getSessionFactory());
+            userService = new UserService();
         }
         return userService;
     }
 
-    UserHibernateDAO dao = new UserHibernateDAO(sessionFactory);
 
     public List<User> getAllUsers() throws SQLException {
         return dao.getAllUsers();
