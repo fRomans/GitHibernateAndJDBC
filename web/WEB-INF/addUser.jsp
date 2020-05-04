@@ -13,5 +13,8 @@
 
     <input type="submit" value="Сохранить">
 </form>
+
+<p> ${AddUserException}</p>
+<p> ${NumberFormatException}</p>
 </body>
 </html>

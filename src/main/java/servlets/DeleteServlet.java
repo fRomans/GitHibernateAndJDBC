@@ -22,26 +22,27 @@ public class DeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteUser.jsp");
-        dispatcher.forward(req, resp);
+//        RequestDispatcher dispatcher = req.getRequestDispatcher("/deleteUser.jsp");
+//        dispatcher.forward(req, resp);
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-       // RequestDispatcher dispatcher;
         try {
             Integer id = Integer.parseInt(req.getParameter("id"));
-//            dispatcher = req.getRequestDispatcher("/deleteUser.jsp");
-//            dispatcher.forward(req, resp);
             service.deleteUser(service.getUserById(id));
-            resp.sendRedirect("/users");
-        } catch (SQLException | NullPointerException e) {
-            System.out.println("DeleteServlet исключение " + e);
-            resp.setStatus(400);
-        }
+            //throw new SQLException("eeee");
 
+        } catch (SQLException | NullPointerException e) {
+            req.setAttribute("DeleteUserException", "Ошибка SQL/NullPointer при удалении user");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/deleteUser.jsp");
+            dispatcher.forward(req, resp);
+            e.printStackTrace();
+
+        }
+        resp.sendRedirect("/users");
 
     }
 

@@ -30,8 +30,8 @@ public class ForwardServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         User user = service.getUserById(new Long(req.getParameter("id")));
-        req.setAttribute("user", user);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/updateUser.jsp");
+        req.setAttribute("user", user);//записываю атрибут на страницу перехода updateUser.jsp
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/updateUser.jsp");
         dispatcher.forward(req, resp);
 
     }

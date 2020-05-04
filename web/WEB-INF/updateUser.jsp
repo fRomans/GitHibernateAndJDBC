@@ -16,5 +16,7 @@
     <input type="submit" value="Обновить">
 </form>
 
+<p> ${UpdateUserException}</p>
+
 </body>
 </html>

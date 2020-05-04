@@ -13,5 +13,7 @@
 <input type="submit" value="Удалить">
 </form>
 
+<p> ${DeleteUserException}</p>
+
 </body>
 </html>

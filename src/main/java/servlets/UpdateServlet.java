@@ -24,7 +24,7 @@ public class UpdateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/updateUser.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/updateUser.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -39,8 +39,13 @@ public class UpdateServlet extends HttpServlet {
         user.setMoney(new Long(req.getParameter("money")));
         try {
             service.updateUser(user);
+          // throw new SQLException("eeee");
         } catch (SQLException e) {
+            req.setAttribute("UpdateUserException", "Ошибка SQL при обновлении user");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/updateUser.jsp");
+            dispatcher.forward(req, resp);
             e.printStackTrace();
+
         }
         resp.sendRedirect("/users");
     }

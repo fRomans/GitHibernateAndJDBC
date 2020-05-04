@@ -26,7 +26,7 @@ public class AddServlet extends HttpServlet {
 
 
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/addUser.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("WEB-INF/addUser.jsp");
         dispatcher.forward(req, resp);
     }
 }

@@ -37,5 +37,8 @@
 <form action = "/add" method="post">
     <input type="submit" value="Добавить нового пользователя">
 </form>
+
+<p> ${SQLException}</p>
+
 </body>
 </html>
