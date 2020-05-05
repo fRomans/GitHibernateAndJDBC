@@ -13,9 +13,6 @@ import java.sql.SQLException;
 
 public class DBHelper {
 
-    private static SessionFactory sessionFactory;
-    
-
 
     @SuppressWarnings("UnusedDeclaration")
     public static SessionFactory getConfiguration() {
@@ -38,14 +35,6 @@ public class DBHelper {
 
     }
 
-
-//    public static SessionFactory createSessionFactory() {
-//        Configuration configuration = getConfiguration();
-//        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-//        builder.applySettings(configuration.getProperties());
-//        ServiceRegistry serviceRegistry = builder.build();
-//        return configuration.buildSessionFactory(serviceRegistry);
-//    }
 
     public static Connection getConnection() {
         Properties properties = PropertyReader.getPropertyValue("jdbcConn.properties");

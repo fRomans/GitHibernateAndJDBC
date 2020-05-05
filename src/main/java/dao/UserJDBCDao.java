@@ -133,29 +133,15 @@ private static UserJDBCDao instance;
             System.out.println("!!! Не прошло валидацию!!!");
             return;
         }
-        Statement stmt1 = null;
-        try {
-            stmt1 = connection.createStatement();
+       try {
 
-        ResultSet result1 = stmt1.executeQuery("select * from user_db ");
-        String nameClient = user.getName();
         PreparedStatement stmt = connection
                 .prepareStatement("insert into  `user_db`(name, password, money) values(?,?,?)");
-        List nameList = new LinkedList();
-
-        while (result1.next()) {
-            nameList.add(result1.getString(2));
-        }
-        if (!nameList.contains(nameClient)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getPassword());
             stmt.setLong(3, user.getMoney());
             stmt.executeUpdate();
-            result1.close();
             stmt.close();
-        } else {
-            System.out.println("В базе есть такой клиент");
-        }
         } catch (SQLException e) {
             e.printStackTrace();
         }

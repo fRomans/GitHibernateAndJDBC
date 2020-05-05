@@ -52,11 +52,10 @@ public class UserService {
         return user;
     }
 
-    public boolean addUser(User user) throws SQLException {
+    public void addUser(User user) throws SQLException {
 
         dao.addUser(user);
 
-        return false;
     }
 
 }
