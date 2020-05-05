@@ -8,9 +8,9 @@ public class UserDaoFactory {
     public static UserDAO getRealization(String fileName) {
         UserDAO userDAO = null;
         if (PropertyReader.getPropertyValue(fileName).getProperty("daotype").equals("hibernate")) {
-            userDAO = new UserHibernateDAO(DBHelper.getConfiguration());
+            userDAO = UserHibernateDAO.getInstance();
         } else if (PropertyReader.getPropertyValue(fileName).getProperty("daotype").equals("jdbc")) {
-            userDAO = new UserJDBCDao(DBHelper.getConnection());
+            userDAO = UserJDBCDao.getInstance();
         }
         return userDAO ;
     }

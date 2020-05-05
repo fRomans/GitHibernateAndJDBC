@@ -63,7 +63,7 @@ public class MyServlet extends HttpServlet {
 
         try {
             service.addUser(user);
-          throw new SQLException("eeee");
+        //  throw new SQLException("eeee");
 
         } catch (SQLException e) {
             req.setAttribute("AddUserException", "Ошибка SQL при добавлении user");

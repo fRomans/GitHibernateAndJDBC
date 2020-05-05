@@ -7,21 +7,27 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.cfg.Configuration;
+import util.DBHelper;
+
 import java.util.List;
 
 public class UserHibernateDAO implements UserDAO {
 
     private static  SessionFactory sessionFactory;
+    private static UserHibernateDAO instance;
 
-    public  UserHibernateDAO(Configuration configuration) {
+    private  UserHibernateDAO() {
         if (sessionFactory == null) {
-            StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-            builder.applySettings(configuration.getProperties());
-            ServiceRegistry serviceRegistry = builder.build();
-            configuration.buildSessionFactory(serviceRegistry);
-            this.sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            this.sessionFactory = DBHelper.getConfiguration();
         }
 
+    }
+
+    public static UserHibernateDAO getInstance(){
+        if (instance==null){
+            instance = new UserHibernateDAO();
+        }
+        return instance;
     }
 
 

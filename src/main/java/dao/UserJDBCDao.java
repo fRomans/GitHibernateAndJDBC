@@ -9,9 +9,17 @@ import java.util.List;
 
 public class UserJDBCDao implements UserDAO {
     private Connection connection;
+private static UserJDBCDao instance;
 
-    public UserJDBCDao(Connection connection) {
-        this.connection = connection;
+    private UserJDBCDao() {
+     connection = DBHelper.getConnection();
+    }
+
+    public static UserJDBCDao getInstance(){
+        if (instance==null){
+            instance = new UserJDBCDao();
+        }
+        return instance;
     }
 
     //проверить наличие имени и пароля

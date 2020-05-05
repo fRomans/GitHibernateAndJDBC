@@ -14,17 +14,11 @@ import java.sql.SQLException;
 public class DBHelper {
 
     private static SessionFactory sessionFactory;
-
-//    public static SessionFactory getSessionFactory() {
-//        if (sessionFactory == null) {
-//            sessionFactory = createSessionFactory();
-//        }
-//        return sessionFactory;
-//    }
+    
 
 
     @SuppressWarnings("UnusedDeclaration")
-    public static Configuration getConfiguration() {
+    public static SessionFactory getConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);//Read metadata from the annotations associated with this class.
 
@@ -36,8 +30,11 @@ public class DBHelper {
         configuration.setProperty("hibernate.connection.password", properties.getProperty("daotype.hibernate.connection.password"));
         configuration.setProperty("hibernate.show_sql", properties.getProperty("daotype.hibernate.show_sql"));
         configuration.setProperty("hibernate.hbm2ddl.auto", properties.getProperty("daotype.hibernate.hbm2ddl.auto"));
-        return configuration;
-
+        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+        builder.applySettings(configuration.getProperties());
+        ServiceRegistry serviceRegistry = builder.build();
+        configuration.buildSessionFactory(serviceRegistry);
+        return configuration.buildSessionFactory(serviceRegistry);
 
     }
 
