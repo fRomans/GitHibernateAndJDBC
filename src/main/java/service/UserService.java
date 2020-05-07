@@ -18,12 +18,11 @@ public class UserService {
 
     private UserService() {
 
-        this.dao = UserDaoFactory.getRealization("hibernateConn.properties");//todo получать dao из фабрики
+        this.dao = UserDaoFactory.getRealization();
     }
 
     private UserService(UserDAO dao) {
-
-        this.dao = dao;//todo получать dao из фабрики
+        this.dao = dao;
     }
 
     public static UserService getInstance() {

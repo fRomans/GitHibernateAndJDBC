@@ -5,11 +5,11 @@ import util.PropertyReader;
 
 public class UserDaoFactory {
 
-    public static UserDAO getRealization(String fileName) {
+    public static UserDAO getRealization() {
         UserDAO userDAO = null;
-        if (PropertyReader.getPropertyValue(fileName).getProperty("daotype").equals("hibernate")) {
+        if (PropertyReader.getPropertyValue("factory.properties").getProperty("daotype").equals("hibernate")) {
             userDAO = UserHibernateDAO.getInstance();
-        } else if (PropertyReader.getPropertyValue(fileName).getProperty("daotype").equals("jdbc")) {
+        } else  {
             userDAO = UserJDBCDao.getInstance();
         }
         return userDAO ;
